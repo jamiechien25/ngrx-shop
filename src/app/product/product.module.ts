@@ -5,6 +5,7 @@ import { ProductRoutingModule } from './product-routing.module';
 import { ProductComponent } from './product/product.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { HeaderModule } from '../share/header/header.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     ProductRoutingModule,
     NzSelectModule,
     NzButtonModule,
+    HeaderModule
   ]
 })
 export class ProductModule { }

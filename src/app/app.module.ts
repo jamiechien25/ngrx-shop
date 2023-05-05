@@ -15,6 +15,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { StoreModule } from '@ngrx/store';
 import { counterFeatureKey, numReducer2 } from './store/reducers';
+import { HeaderModule } from './share/header/header.module';
 
 registerLocaleData(en);
 
@@ -33,11 +34,13 @@ registerLocaleData(en);
     IconsProviderModule,
     NzLayoutModule,
     NzMenuModule,
+    HeaderModule,
     StoreModule.forRoot({ [counterFeatureKey]: numReducer2 }, {}),
   ],
   exports: [
     FormsModule,
     ReactiveFormsModule,
+    HeaderModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }
