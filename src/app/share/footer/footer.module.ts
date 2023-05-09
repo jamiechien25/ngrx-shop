@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FooterRoutingModule } from './footer-routing.module';
 import { FooterComponent } from './footer/footer.component';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 
 @NgModule({
@@ -11,7 +12,11 @@ import { FooterComponent } from './footer/footer.component';
   ],
   imports: [
     CommonModule,
-    FooterRoutingModule
+    FooterRoutingModule,
+    NzIconModule
+  ],
+  exports: [
+    FooterComponent
   ]
 })
 export class FooterModule { }
