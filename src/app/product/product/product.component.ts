@@ -13,56 +13,36 @@ import { selectProductState } from 'src/app/store/selectors';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  show$?: Observable<any>;
-  // show?: number;
+  storeData$?: Observable<any>;
   productInfo: product[] = []
-  productdata: any = [];
 
 
   constructor(
     private store: Store<{ counter: products }>
   ) {
-    this.show$ = store.select('counter')
   }
 
   ngOnInit(): void {
-    this.store.subscribe(data => {
-      console.log('ALL STORE DATA', data)
-      this.productdata = data.counter
+    this.store.subscribe((data) => {
+      console.log('storeData', data)
+      this.productInfo = data.counter.products;
     })
-    this.show$!.subscribe((data) => {
-      this.productInfo = data.products
-      console.log(this.productInfo)
-      // this.show! = data[item.id!].productCount
-    })
-
   }
 
 
   incrementNum(item: product) {
-    // item.productCount! +=1
     this.store.dispatch(productActionadd({ item }))
   }
 
+
   decrementNum(item: product) {
-    // item.productCount! -=1
     this.store.dispatch(productActiondown({ item }))
-    console.log(item)
   }
+
 
   add(item: product) {
-    this.store.dispatch(productActionCart({item}))
-    this.show$!.subscribe(data => {
-      console.log(item)
-      console.log( data.products[item.id! - 1])
-    })
-    // console.log(item)
+    this.store.dispatch(productActionCart({ item }))
   }
-
-
-
-
-
 
 
 
