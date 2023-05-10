@@ -1,7 +1,14 @@
 <div class="header-bg">
   <div class="header-container">
+    <div class="smile">
     <span nz-icon [nzType]="'smile'" [nzTheme]="'outline'" [nzRotate]="180"
       style="font-size: 24px; color: rgb(255, 255, 255);">
     </span>
+    商品頁
+  </div>
+    <div class="crat" (click)="goCart()">
+      <span nz-icon nzType="shopping-cart" nzTheme="outline" style="font-size: 24px; color: rgb(255, 255, 255);"></span>
+      購物車
+    </div>
   </div>
 </div>

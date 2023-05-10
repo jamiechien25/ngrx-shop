@@ -1,7 +1,11 @@
+
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { product } from 'src/app/interface/product';
+import { productActionCart, productActionadd, productActiondown } from 'src/app/store/actions';
+import { products } from 'src/app/store/reducers';
+import { selectProductState } from 'src/app/store/selectors';
 
 @Component({
   selector: 'app-product',
@@ -9,97 +13,55 @@ import { product } from 'src/app/interface/product';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  showNumber$?: Observable<any>;
-  show?: number;
-  productInfo:product[] = []
+  show$?: Observable<any>;
+  // show?: number;
+  productInfo: product[] = []
+  productdata: any = [];
+
 
   constructor(
-    private store: Store<{ counter: any }>
+    private store: Store<{ counter: products }>
   ) {
-    this.showNumber$ = store.select('counter')
+    this.show$ = store.select('counter')
   }
 
   ngOnInit(): void {
-    this.store.subscribe(data => { console.log('ALL STORE DATA', data) })
-    this.showNumber$!.subscribe(data => {
-      this.show! = data.count
+    this.store.subscribe(data => {
+      console.log('ALL STORE DATA', data)
+      this.productdata = data.counter
     })
-
-    this.productInfo = [
-      {
-        productId: 'productNo1',
-        productName: '商品A',
-        productPrice: 123,
-        productCount: 1,
-        productDesc: '商品A細節',
-      },
-      {
-        productId: 'productNo2',
-        productName: '商品B',
-        productPrice: 234,
-        productCount: 1,
-        productDesc: '商品B細節',
-      },
-      {
-        productId: 'productNo3',
-        productName: '商品C',
-        productPrice: 124,
-        productCount: 1,
-        productDesc: '商品C細節',
-      },
-      {
-        productId: 'productNo4',
-        productName: '商品D',
-        productPrice: 125,
-        productCount: 1,
-        productDesc: '商品D細節',
-      },
-      {
-        productId: 'productNo5',
-        productName: '商品E',
-        productPrice: 128,
-        productCount: 1,
-        productDesc: '商品E細節',
-      },
-      {
-        productId: 'productNo6',
-        productName: '商品F',
-        productPrice: 1111,
-        productCount: 1,
-        productDesc: '商品F細節',
-      },
-      {
-        productId: 'productNo7',
-        productName: '商品G',
-        productPrice: 12312,
-        productCount: 1,
-        productDesc: '商品G細節',
-      },
-      {
-        productId: 'productNo8',
-        productName: '商品H',
-        productPrice: 1233,
-        productCount: 1,
-        productDesc: '商品H細節',
-      },
-    ] as product[]
-
+    this.show$!.subscribe((data) => {
+      this.productInfo = data.products
+      console.log(this.productInfo)
+      // this.show! = data[item.id!].productCount
+    })
 
   }
 
-  incrementNum() {
-    this.store.dispatch({
-      type: 'increment'
-    })
+
+  incrementNum(item: product) {
+    // item.productCount! +=1
+    this.store.dispatch(productActionadd({ item }))
   }
 
-  decrementNum() {
-    this.store.dispatch({
-      type: 'decrement'
-    })
+  decrementNum(item: product) {
+    // item.productCount! -=1
+    this.store.dispatch(productActiondown({ item }))
+    console.log(item)
   }
 
-  addCart(){}
+  add(item: product) {
+    this.store.dispatch(productActionCart({item}))
+    this.show$!.subscribe(data => {
+      console.log(item)
+      console.log( data.products[item.id! - 1])
+    })
+    // console.log(item)
+  }
+
+
+
+
 
 
 

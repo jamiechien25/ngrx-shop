@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule, registerLocaleData } from '@angular/common';
@@ -14,8 +13,8 @@ import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { StoreModule } from '@ngrx/store';
-import { counterFeatureKey, numReducer2 } from './store/reducers';
 import { HeaderModule } from './share/header/header.module';
+import { numReducer } from './store/reducers';
 
 registerLocaleData(en);
 
@@ -35,7 +34,7 @@ registerLocaleData(en);
     NzLayoutModule,
     NzMenuModule,
     HeaderModule,
-    StoreModule.forRoot({ [counterFeatureKey]: numReducer2 }, {}),
+    StoreModule.forRoot({ counter:numReducer }, {}),
   ],
   exports: [
     FormsModule,

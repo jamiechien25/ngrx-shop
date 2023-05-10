@@ -21,3 +21,10 @@ export const loadProductsFailure = createAction(
   props<{ error: any }>()
 );
 
+
+export const productActionadd = createAction("productActionadd",
+props<{ item: product }>());
+export const productActiondown = createAction("productActiondown",
+props<{ item: product }>());
+export const productActionCart = createAction("productActionCart",
+props<{ item: product }>());
