@@ -1,11 +1,10 @@
 
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { product } from 'src/app/interface/product';
 import { productActionCart, productActionadd, productActiondown } from 'src/app/store/actions';
 import { products } from 'src/app/store/reducers';
-import { selectProductState } from 'src/app/store/selectors';
+
 
 @Component({
   selector: 'app-product',
@@ -13,7 +12,6 @@ import { selectProductState } from 'src/app/store/selectors';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  storeData$?: Observable<any>;
   productInfo: product[] = []
 
 

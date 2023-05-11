@@ -13,3 +13,12 @@ export const productActiondown = createAction("productActiondown",
 // add to cart
 export const productActionCart = createAction("productActionCart",
   props<{ item: product }>());
+
+
+// Cart +
+export const CartActionadd = createAction("CartActionadd",
+  props<{ item: product }>());
+
+// Cart -
+export const CartActiondown = createAction("CartActiondown",
+  props<{ item: product }>());

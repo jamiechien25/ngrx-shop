@@ -1,1 +1,29 @@
-<p>cart works!</p>
+<app-header></app-header>
+<nz-table style=" margin: 50px;" #rowSelectionTable nzShowSizeChanger [nzData]="cartProsuctList"
+  (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+  <thead>
+    <tr>
+      <th [nzSelections]="listOfSelection" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate"
+        (nzCheckedChange)="onAllChecked($event)"></th>
+      <th>商品名稱</th>
+      <th>商品價錢</th>
+      <th>商品敘述</th>
+      <th>商品數量</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of cartProsuctList,; let i = index">
+      <td [nzChecked]="setOfCheckedId.has(i + 1)" (nzCheckedChange)="onItemChecked(i + 1, $event)"></td>
+      <td>{{ data.productName }}</td>
+      <td>NT.{{ data.productPrice * data.productCount }}</td>
+      <td>{{ data.productDesc }}</td>
+      <td>
+        <button nz-button nzType="primary" [nzSize]="'small'" nzGhost (click)="incrementNum(data)">+ </button>
+        &nbsp;&nbsp; {{ data.productCount }} &nbsp;&nbsp;
+        <button [nzSize]="'small'" nzGhost nz-button nzType="primary" (click)="decrementNum(data)">-</button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+
+<app-footer></app-footer>

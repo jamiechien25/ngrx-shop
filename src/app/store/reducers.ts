@@ -1,12 +1,14 @@
+
 import { product } from 'src/app/interface/product';
 import { createReducer, on, Action } from '@ngrx/store';
-import { productActionadd, productActiondown } from './actions';
+import { CartActionadd, CartActiondown, productActionCart, productActionadd, productActiondown } from './actions';
 
 
 export const counterFeatureKey = "counter";
 
 export interface products {
   products: product[]
+  cart: product[]
 }
 
 
@@ -67,7 +69,17 @@ export const ProductState = {
       productPrice: 1233,
       productCount: 1,
       productDesc: '商品H細節',
-    }]
+    }],
+  cart: [
+    {
+      productId: '',
+      productName: '',
+      productPrice: 0,
+      productCount: 0,
+      productDesc: '',
+    }
+  ]
+
 }
 
 
@@ -82,6 +94,30 @@ export const numReducer = createReducer(
     if (item.productCount <= 1) return state
     return { ...state, products: state.products.map((p) => p.productId === item.productId ? { ...p, productCount: p.productCount - 1 } : p) };
   }),
+
+  on(productActionCart, (state, { item }) => {
+    let update:product[];
+    if(state.cart.filter(x=> x.productId === item.productId ).length > 0){
+      console.log('in this')
+      update = state.cart.map(p=>p.productId === item.productId ? {...p,productCount:p.productCount+ item.productCount}:p)
+    }else{
+      update = [...state.cart, item]
+    }
+   return {...state, cart: update }
+  }
+  ),
+
+  on(CartActionadd, (state, { item }) => {
+    return { ...state, cart: state.cart.map((p) => p.productId === item.productId ? { ...p, productCount: p.productCount + 1 } : p) };
+  }),
+
+
+  on(CartActiondown, (state, { item }) => {
+    if (item.productCount <= 1) return state
+    return { ...state, cart: state.cart.map((p) => p.productId === item.productId ? { ...p, productCount: p.productCount - 1 } : p) };
+  }),
 )
+
+
 
 

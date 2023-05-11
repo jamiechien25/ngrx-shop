@@ -24,4 +24,8 @@ export class HeaderComponent {
     this.router.navigate(['cart'], { relativeTo: this.route });
   }
 
+  goProduct() {
+    this.router.navigate([''], { relativeTo: this.route });
+  }
+
 }
