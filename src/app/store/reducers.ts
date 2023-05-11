@@ -71,14 +71,8 @@ export const ProductState = {
       productDesc: '商品H細節',
     }],
   cart: [
-    {
-      productId: '',
-      productName: '',
-      productPrice: 0,
-      productCount: 0,
-      productDesc: '',
-    }
-  ]
+
+  ] as product[]
 
 }
 
@@ -98,7 +92,6 @@ export const numReducer = createReducer(
   on(productActionCart, (state, { item }) => {
     let update:product[];
     if(state.cart.filter(x=> x.productId === item.productId ).length > 0){
-      console.log('in this')
       update = state.cart.map(p=>p.productId === item.productId ? {...p,productCount:p.productCount+ item.productCount}:p)
     }else{
       update = [...state.cart, item]

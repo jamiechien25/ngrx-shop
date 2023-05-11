@@ -9,6 +9,7 @@
       <th>商品價錢</th>
       <th>商品敘述</th>
       <th>商品數量</th>
+      <th>刪除</th>
     </tr>
   </thead>
   <tbody>
@@ -22,6 +23,7 @@
         &nbsp;&nbsp; {{ data.productCount }} &nbsp;&nbsp;
         <button [nzSize]="'small'" nzGhost nz-button nzType="primary" (click)="decrementNum(data)">-</button>
       </td>
+      <td><a (click)="del(data)">Delete</a></td>
     </tr>
   </tbody>
 </nz-table>

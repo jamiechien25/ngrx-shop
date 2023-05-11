@@ -42,12 +42,12 @@ export class CartComponent {
 
   constructor(
     private store: Store<{ counter: products }>
-  ) {}
+  ) { }
 
   ngOnInit(): void {
 
     this.store.subscribe(x => {
-      this.cartProsuctList = x.counter.cart.filter(x => x.productId != '');
+      this.cartProsuctList = x.counter.cart;
     })
 
   }
@@ -87,6 +87,10 @@ export class CartComponent {
   refreshCheckedStatus(): void {
     this.checked = this.listOfCurrentPageData.every(item => this.setOfCheckedId.has(Number(item.productId)));
     this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(Number(item.productId))) && !this.checked;
+  }
+
+  del(data: product) {
+    console.log(data)
   }
 
 
