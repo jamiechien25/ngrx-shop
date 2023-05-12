@@ -30,4 +30,4 @@ export const CartActionDelete = createAction("CartActionDelete",
 
 // Go CheckOutProduct
 export const CheckOutProduct = createAction("CheckOutProduct",
-  props<{ item: product[] }>());
+  props<{ NewArr: string[] }>());

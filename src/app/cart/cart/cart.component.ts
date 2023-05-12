@@ -31,6 +31,7 @@ export class CartComponent {
 
     this.store.subscribe(x => {
       this.cartProsuctList = x.counter.cart;
+      console.log( this.cartProsuctList)
     })
 
   }
@@ -82,11 +83,9 @@ export class CartComponent {
 
   buy() {
     if (this.cartProsuctList.length > 0 && this.indeterminate) {
-      let NewArr : any[]
+      let NewArr : string[]
       NewArr = Array.from(this.setOfCheckedId)
-      let CheckOutList : product[]
-      CheckOutList =  this.cartProsuctList.filter(x=> NewArr.includes(x.productId))
-      // this.store.dispatch(CheckOutProduct({ CheckOutList }))
+      this.store.dispatch(CheckOutProduct({ NewArr }))
       this.router.navigate(['../checkout'], { relativeTo: this.route });
     } else {
       window.alert('目前無商品可以結帳')

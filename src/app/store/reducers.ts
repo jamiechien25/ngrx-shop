@@ -9,6 +9,7 @@ export const counterFeatureKey = "counter";
 export interface products {
   products: product[]
   cart: product[]
+  checkOut: product[]
 }
 
 
@@ -70,9 +71,8 @@ export const ProductState = {
       productCount: 1,
       productDesc: '商品H細節',
     }],
-  cart: [
-
-  ] as product[]
+  cart: [] as product[],
+  checkOut: [] as product[],
 
 }
 
@@ -90,13 +90,13 @@ export const numReducer = createReducer(
   }),
 
   on(productActionCart, (state, { item }) => {
-    let update:product[];
-    if(state.cart.filter(x=> x.productId === item.productId ).length > 0){
-      update = state.cart.map(p=>p.productId === item.productId ? {...p,productCount:p.productCount+ item.productCount}:p)
-    }else{
+    let update: product[];
+    if (state.cart.filter(x => x.productId === item.productId).length > 0) {
+      update = state.cart.map(p => p.productId === item.productId ? { ...p, productCount: p.productCount + item.productCount } : p)
+    } else {
       update = [...state.cart, item]
     }
-   return {...state, cart: update }
+    return { ...state, cart: update }
   }
   ),
 
@@ -113,15 +113,19 @@ export const numReducer = createReducer(
 
 
   on(CartActionDelete, (state, { item }) => {
-    let deleteItem = [...state.cart] ;
-   return {...state, cart: deleteItem.filter(x=> x.productId !== item.productId) }
+    let deleteItem = [...state.cart];
+    return { ...state, cart: deleteItem.filter(x => x.productId !== item.productId) }
   }
   ),
 
-  on(CheckOutProduct, (state, { item }) => {
-    // let refreshItem :product[];
-    // refreshItem = [...state.cart,item] ;
-   return {...state, cart: item }
+
+
+  on(CheckOutProduct, (state, { NewArr }) => {
+    let CheckOutList: product[]
+    CheckOutList = state.cart.filter(x => NewArr.includes(x.productId))
+    let CartList: product[]
+    CartList = state.cart.filter(x => !NewArr.includes(x.productId))
+    return { ...state, cart: CartList, checkOut: CheckOutList }
   }
   ),
 )
