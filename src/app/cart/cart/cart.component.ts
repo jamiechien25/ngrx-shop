@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { product } from 'src/app/interface/product';
-import { CartActionadd, CartActiondown } from 'src/app/store/actions';
+import { CartActionDelete, CartActionadd, CartActiondown, CheckOutProduct } from 'src/app/store/actions';
 import { products } from 'src/app/store/reducers';
 
 @Component({
@@ -14,34 +15,16 @@ export class CartComponent {
   checked = false;
   indeterminate = false;
   listOfCurrentPageData: readonly product[] = [];
-  setOfCheckedId = new Set<number>();
+  setOfCheckedId = new Set<string>();
   cartProsuctList: product[] = []
-  listOfSelection = [
-    {
-      text: 'Select All Row',
-      onSelect: () => {
-        this.onAllChecked(true);
-      }
-    },
-    {
-      text: 'Select Odd Row',
-      onSelect: () => {
-        this.listOfCurrentPageData.forEach((data, index) => this.updateCheckedSet(Number(data.productId), index % 2 !== 0));
-        this.refreshCheckedStatus();
-      }
-    },
-    {
-      text: 'Select Even Row',
-      onSelect: () => {
-        this.listOfCurrentPageData.forEach((data, index) => this.updateCheckedSet(Number(data.productId), index % 2 === 0));
-        this.refreshCheckedStatus();
-      }
-    }
-  ];
+
+
 
 
   constructor(
-    private store: Store<{ counter: products }>
+    private store: Store<{ counter: products }>,
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -61,7 +44,8 @@ export class CartComponent {
     this.store.dispatch(CartActiondown({ item }))
   }
 
-  updateCheckedSet(id: number, checked: boolean): void {
+  updateCheckedSet(id: string, checked: boolean): void {
+    console.log('updateCheckedSet', id, checked)
     if (checked) {
       this.setOfCheckedId.add(id);
     } else {
@@ -69,13 +53,14 @@ export class CartComponent {
     }
   }
 
-  onItemChecked(id: number, checked: boolean): void {
+  onItemChecked(id: string, checked: boolean): void {
+    console.log(' onItemChecked', id, checked)
     this.updateCheckedSet(id, checked);
     this.refreshCheckedStatus();
   }
 
   onAllChecked(value: boolean): void {
-    this.listOfCurrentPageData.forEach(item => this.updateCheckedSet(Number(item.productId), value));
+    this.listOfCurrentPageData.forEach(item => this.updateCheckedSet(item.productId, value));
     this.refreshCheckedStatus();
   }
 
@@ -85,16 +70,21 @@ export class CartComponent {
   }
 
   refreshCheckedStatus(): void {
-    this.checked = this.listOfCurrentPageData.every(item => this.setOfCheckedId.has(Number(item.productId)));
-    this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(Number(item.productId))) && !this.checked;
+    console.log(this.listOfCurrentPageData)
+
+    this.checked = this.listOfCurrentPageData.every(item => { this.setOfCheckedId.has(item.productId) });
+    this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(item.productId)) && !this.checked;
   }
 
-  del(data: product) {
-    console.log(data)
+  del(item: product) {
+    this.store.dispatch(CartActionDelete({ item }))
   }
 
-
-
-
-
+  buy() {
+    if(this.cartProsuctList.length > 0){
+      this.router.navigate(['../checkout'], { relativeTo: this.route });
+    }else{
+      window.alert('目前無商品可以結帳')
+    }
+  }
 }

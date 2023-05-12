@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { product } from 'src/app/interface/product';
 
 @Component({
   selector: 'app-checkout',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent {
-
+  checkProsuctList: product[] = []
 }

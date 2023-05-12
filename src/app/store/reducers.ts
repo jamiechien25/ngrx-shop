@@ -1,7 +1,7 @@
 
 import { product } from 'src/app/interface/product';
 import { createReducer, on, Action } from '@ngrx/store';
-import { CartActionadd, CartActiondown, productActionCart, productActionadd, productActiondown } from './actions';
+import { CartActionDelete, CartActionadd, CartActiondown, CheckOutProduct, productActionCart, productActionadd, productActiondown } from './actions';
 
 
 export const counterFeatureKey = "counter";
@@ -109,6 +109,14 @@ export const numReducer = createReducer(
     if (item.productCount <= 1) return state
     return { ...state, cart: state.cart.map((p) => p.productId === item.productId ? { ...p, productCount: p.productCount - 1 } : p) };
   }),
+
+
+  on(CartActionDelete, (state, { item }) => {
+    let deleteItem = [...state.cart] ;
+   return {...state, cart: deleteItem.filter(x=> x.productId !== item.productId) }
+  }
+  ),
+
 )
 
 

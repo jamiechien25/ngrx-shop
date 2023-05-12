@@ -22,3 +22,12 @@ export const CartActionadd = createAction("CartActionadd",
 // Cart -
 export const CartActiondown = createAction("CartActiondown",
   props<{ item: product }>());
+
+
+// Cartdelete
+export const CartActionDelete = createAction("CartActionDelete",
+  props<{ item: product }>());
+
+// Go CheckOutProduct
+export const CheckOutProduct = createAction("CheckOutProduct",
+  props<{ item: product }>());

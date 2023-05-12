@@ -16,6 +16,7 @@ import { StoreModule } from '@ngrx/store';
 import { HeaderModule } from './share/header/header.module';
 import { numReducer } from './store/reducers';
 
+
 registerLocaleData(en);
 
 @NgModule({

@@ -9,6 +9,9 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { FooterModule } from '../share/footer/footer.module';
 import { HeaderModule } from '../share/header/header.module';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
+
 
 
 @NgModule({
@@ -24,7 +27,11 @@ import { NzTableModule } from 'ng-zorro-antd/table';
     HeaderModule,
     FooterModule,
     NzCardModule,
-    NzTableModule
+    NzTableModule,
+    NzAlertModule,
+    NzMessageModule,
+
+
   ]
 })
 export class CartModule { }
