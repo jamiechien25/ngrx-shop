@@ -45,16 +45,15 @@ export class CartComponent {
   }
 
   updateCheckedSet(id: string, checked: boolean): void {
-    console.log('updateCheckedSet', id, checked)
     if (checked) {
       this.setOfCheckedId.add(id);
     } else {
       this.setOfCheckedId.delete(id);
     }
+
   }
 
   onItemChecked(id: string, checked: boolean): void {
-    console.log(' onItemChecked', id, checked)
     this.updateCheckedSet(id, checked);
     this.refreshCheckedStatus();
   }
@@ -70,10 +69,11 @@ export class CartComponent {
   }
 
   refreshCheckedStatus(): void {
-    console.log(this.listOfCurrentPageData)
-
-    this.checked = this.listOfCurrentPageData.every(item => { this.setOfCheckedId.has(item.productId) });
+    this.checked = this.listOfCurrentPageData.every(item => {this.setOfCheckedId.has(item.productId);});
     this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(item.productId)) && !this.checked;
+    this.listOfCurrentPageData.some(item => {
+      this.setOfCheckedId.has(item.productId)
+    })
   }
 
   del(item: product) {
@@ -81,9 +81,14 @@ export class CartComponent {
   }
 
   buy() {
-    if(this.cartProsuctList.length > 0){
+    if (this.cartProsuctList.length > 0 && this.indeterminate) {
+      let NewArr : any[]
+      NewArr = Array.from(this.setOfCheckedId)
+      let CheckOutList : product[]
+      CheckOutList =  this.cartProsuctList.filter(x=> NewArr.includes(x.productId))
+      // this.store.dispatch(CheckOutProduct({ CheckOutList }))
       this.router.navigate(['../checkout'], { relativeTo: this.route });
-    }else{
+    } else {
       window.alert('目前無商品可以結帳')
     }
   }

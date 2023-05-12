@@ -25,7 +25,7 @@ export class HeaderComponent {
   }
 
   goProduct() {
-    this.router.navigate([''], { relativeTo: this.route });
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
 }

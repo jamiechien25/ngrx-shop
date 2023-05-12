@@ -111,12 +111,19 @@ export const numReducer = createReducer(
   }),
 
 
+
   on(CartActionDelete, (state, { item }) => {
     let deleteItem = [...state.cart] ;
    return {...state, cart: deleteItem.filter(x=> x.productId !== item.productId) }
   }
   ),
 
+  on(CheckOutProduct, (state, { item }) => {
+    // let refreshItem :product[];
+    // refreshItem = [...state.cart,item] ;
+   return {...state, cart: item }
+  }
+  ),
 )
 
 
