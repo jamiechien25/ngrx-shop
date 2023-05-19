@@ -1,1 +1,28 @@
-<p>checkout works!</p>
+<app-header></app-header>
+<nz-table style=" margin: 50px;" #rowSelectionTable nzShowSizeChanger [nzData]="checkProsuctList"
+  >
+  <thead>
+    <tr>
+      <th>商品圖片</th>
+      <th>商品名稱</th>
+      <th>商品總價錢</th>
+      <th>商品敘述</th>
+      <th>商品數量</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of checkProsuctList">
+      <td><img style="width:100px" alt="example"  src="../../../assets/Img/photo{{item.productId}}.jpg" /></td>
+      <td>{{ item.productName }}</td>
+      <td>NT.{{ item.productPrice * item.productCount }}</td>
+      <td>{{ item.productDesc }}</td>
+      <td>
+        {{ item.productCount }}
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+
+<h2 style="text-align: center;">商品總金額為 : {{total}}</h2>
+
+<app-footer></app-footer>

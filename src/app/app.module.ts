@@ -15,6 +15,8 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { StoreModule } from '@ngrx/store';
 import { HeaderModule } from './share/header/header.module';
 import { numReducer } from './store/reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { TodosEffects } from './store/effects';
 
 
 registerLocaleData(en);
@@ -36,6 +38,7 @@ registerLocaleData(en);
     NzMenuModule,
     HeaderModule,
     StoreModule.forRoot({ counter:numReducer }, {}),
+    EffectsModule.forRoot([TodosEffects])
   ],
   exports: [
     FormsModule,

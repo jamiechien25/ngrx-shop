@@ -1,8 +1,11 @@
 <app-header></app-header>
 
+
+
 <div class="flex-box" style="display: flex;flex-wrap: wrap;">
   <div class="container" *ngFor="let item of productInfo ; let i = index">
-    <nz-card style="width: 300px;margin: 60px 30px" [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis,addCart]">
+    <nz-card style="width: 300px;margin: 60px 30px" [nzCover]="coverTemplate"
+      [nzActions]="[actionSetting, actionEdit, actionEllipsis,addCart]">
       <nz-card-meta nzTitle={{item.productName}} nzDescription="This is the description"></nz-card-meta>
       <h3>NT. {{item.productPrice}}</h3>
       <!-- <button style="margin-top: 20px;" nz-button nzType="primary" (click)="reset()">Reset</button> -->
@@ -10,7 +13,11 @@
 
 
     <ng-template #coverTemplate>
-      <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
+      <div class="img-contain">
+        <img style="width:100%;height:100%;object-fit: cover;" alt="example"
+          src="../../../assets/Img/photo{{item.productId}}.jpg" />
+      </div>
+
     </ng-template>
     <ng-template #actionSetting>
       <button nz-button nzType="primary" (click)="incrementNum(item)">+ </button>
@@ -20,7 +27,7 @@
       <span style="width:10px"> {{ item.productCount }} </span>
     </ng-template>
     <ng-template #actionEllipsis>
-      <button nz-button nzType="primary"   (click)="decrementNum(item)">-</button>
+      <button nz-button nzType="primary" (click)="decrementNum(item)">-</button>
       <span nzType="ellipsis"></span>
     </ng-template>
     <ng-template #addCart>
@@ -32,5 +39,5 @@
 </div>
 
 
-
+<button nz-button nzType='dashed' (click)="test()">test</button>
 <app-footer></app-footer>

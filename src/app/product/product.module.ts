@@ -8,6 +8,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { HeaderModule } from '../share/header/header.module';
 import { FooterModule } from '../share/footer/footer.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FooterModule } from '../share/footer/footer.module';
     HeaderModule,
     FooterModule,
     NzCardModule,
+    HttpClientModule
   ]
 })
 export class ProductModule { }
