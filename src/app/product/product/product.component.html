@@ -1,6 +1,13 @@
 <app-header></app-header>
 
+<nz-select style="margin-top: 60px; margin-left: 30px;" nzMode="multiple" nzPlaceHolder="Inserted are removed"
+  [(ngModel)]="listOfSelectedValue">
+  <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.couponDesc" [nzValue]="option.couponId"
+    [nzHide]="!isNotSelected(option)">
 
+  </nz-option>
+</nz-select>
+<button nz-button nzType='dashed' (click)="getCoupon()">領取</button>
 
 <div class="flex-box" style="display: flex;flex-wrap: wrap;">
   <div class="container" *ngFor="let item of productInfo ; let i = index">
@@ -38,9 +45,5 @@
   </div>
 </div>
 
-<nz-select nzMode="multiple" nzPlaceHolder="Inserted are removed" [(ngModel)]="listOfSelectedValue">
-  <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.couponDesc" [nzValue]="option.couponId"
-    [nzHide]="!isNotSelected(option)"></nz-option>
-</nz-select>
-<button nz-button nzType='dashed' (click)="test()">test</button>
+<!-- <button nz-button nzType='dashed' (click)="test()">test</button> -->
 <app-footer></app-footer>

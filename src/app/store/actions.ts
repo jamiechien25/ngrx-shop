@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { product } from '../interface/product';
 import { products } from './reducers';
+import { coupon } from '../interface/coupon';
 
 
 // +
@@ -34,21 +35,26 @@ export const CheckOutProduct = createAction("CheckOutProduct",
   props<{ NewArr: string[] }>());
 
 
-  export const loadTodos = createAction(
-    '[Todos] Load Todos'
-  );
+export const loadTodos = createAction(
+  '[Todos] Load Todos'
+);
 
-  export const loadTodosSuccess = createAction(
-    '[Todos] Load Todos Success',
-    props<{ items: products }>()
-  );
+export const loadTodosSuccess = createAction(
+  '[Todos] Load Todos Success',
+  props<{ items: products }>()
+);
 
-  export const loadTodossFailure = createAction(
-    '[Todos] Load Todos Failure',
-    props<{ error: any; }>()
-  );
+export const loadTodossFailure = createAction(
+  '[Todos] Load Todos Failure',
+  props<{ error: any; }>()
+);
 
 
-  //  CheckOutTotal
-export const CheckOutTotal = createAction("CheckOutTotal",
+//  CheckOutTotal
+export const CheckOutTotal = createAction("CheckOutTotal");
+
+// getCoupon
+export const getCoupon = createAction(
+  'getCoupon',
+  props<{ items: coupon[]; }>()
 );

@@ -1,7 +1,8 @@
 
 import { product } from 'src/app/interface/product';
 import { createReducer, on, Action } from '@ngrx/store';
-import { CartActionDelete, CartActionadd, CartActiondown, CheckOutProduct, CheckOutTotal, loadTodos, loadTodosSuccess, loadTodossFailure, productActionCart, productActionadd, productActiondown } from './actions';
+import { CartActionDelete, CartActionadd, CartActiondown, CheckOutProduct, CheckOutTotal, getCoupon, loadTodos, loadTodosSuccess, loadTodossFailure, productActionCart, productActionadd, productActiondown } from './actions';
+import { coupon } from '../interface/coupon';
 
 
 export const counterFeatureKey = "counter";
@@ -10,7 +11,9 @@ export interface products {
   products: product[]
   cart: product[]
   checkOut: product[]
-  Total:number
+  Total: number
+  couponList: coupon[]
+  couponCart: coupon[]
 }
 
 
@@ -18,8 +21,9 @@ export const ProductState = {
   products: [] as product[],
   cart: [] as product[],
   checkOut: [] as product[],
-  Total:0
-
+  Total: 0,
+  couponList: [] as coupon[],
+  couponCart: [] as coupon[]
 }
 
 
@@ -65,8 +69,7 @@ export const numReducer = createReducer(
   on(CartActionDelete, (state, { item }) => {
     let deleteItem = [...state.cart];
     return { ...state, cart: deleteItem.filter(x => x.productId !== item.productId) }
-  }
-  ),
+  }),
 
 
 
@@ -76,26 +79,28 @@ export const numReducer = createReducer(
     let CartList: product[]
     CartList = state.cart.filter(x => !NewArr.includes(x.productId))
     return { ...state, cart: CartList, checkOut: CheckOutList }
-  }
-  ),
+  }),
 
   on(loadTodosSuccess, (state, { items }) => {
     console.log(items)
-    return { ...state, products:items.products ,cart:items.cart,checkOut:items.checkOut }
-  }
-  ),
+    return { ...state, products: items.products, cart: items.cart, checkOut: items.checkOut, couponList: items.couponList, couponCart: items.couponCart }
+  }),
 
 
   on(CheckOutTotal, (state) => {
-    let Total:number
+    let Total: number
     Total = state.checkOut.reduce((total, item) => {
       console.log('total', total)
       console.log('item', item)
       return total + item.productPrice * item.productCount
     }, 0)
-    return { ...state,Total}
-  }
-  ),
+    return { ...state, Total }
+  }),
+
+  on(getCoupon, (state, { items }) => {
+    console.log('reducer-items', items)
+    return { ...state }
+  }),
 
 
 

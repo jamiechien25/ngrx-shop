@@ -59,6 +59,27 @@
       }
     ],
     "cart": [],
-    "checkOut": []
+    "checkOut": [],
+    "couponList": [
+      {
+        "couponId": "1",
+        "couponDesc": "30元折價券",
+        "discount": 1,
+        "priceOff": 30
+      },
+      {
+        "couponId": "2",
+        "couponDesc": "100元折價券",
+        "discount": 1,
+        "priceOff": 100
+      },
+      {
+        "couponId": "3",
+        "couponDesc": "九折券",
+        "discount": 0.9,
+        "priceOff": 0
+      }
+    ],
+    "couponCart": []
   }
 }
