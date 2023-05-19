@@ -6,7 +6,7 @@
   <div class="container" *ngFor="let item of productInfo ; let i = index">
     <nz-card style="width: 300px;margin: 60px 30px" [nzCover]="coverTemplate"
       [nzActions]="[actionSetting, actionEdit, actionEllipsis,addCart]">
-      <nz-card-meta nzTitle={{item.productName}} nzDescription="This is the description"></nz-card-meta>
+      <nz-card-meta nzTitle={{item.productName}} nzDescription={{item.productDesc}}></nz-card-meta>
       <h3>NT. {{item.productPrice}}</h3>
       <!-- <button style="margin-top: 20px;" nz-button nzType="primary" (click)="reset()">Reset</button> -->
     </nz-card>
@@ -38,6 +38,9 @@
   </div>
 </div>
 
-
+<nz-select nzMode="multiple" nzPlaceHolder="Inserted are removed" [(ngModel)]="listOfSelectedValue">
+  <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.couponDesc" [nzValue]="option.couponId"
+    [nzHide]="!isNotSelected(option)"></nz-option>
+</nz-select>
 <button nz-button nzType='dashed' (click)="test()">test</button>
 <app-footer></app-footer>

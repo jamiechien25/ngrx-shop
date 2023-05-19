@@ -9,6 +9,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { HeaderModule } from '../share/header/header.module';
 import { FooterModule } from '../share/footer/footer.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderModule,
     FooterModule,
     NzCardModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ]
 })
 export class ProductModule { }
